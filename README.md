@@ -4,22 +4,33 @@ CLI for the [Tembo Public API](https://docs.tembo.io/features/public-api) - mana
 
 ## Installation
 
+### From GitHub Packages
+
 ```bash
-# Using bun (recommended)
-bun add -g tembo-cli
+# 1. Create a GitHub Personal Access Token with `read:packages` scope
+#    Go to: https://github.com/settings/tokens/new?scopes=read:packages
 
-# Using npm
-npm install -g tembo-cli
+# 2. Configure npm/bun to use GitHub Packages for @tryosschat scope
+echo "@tryosschat:registry=https://npm.pkg.github.com" >> ~/.npmrc
+echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN" >> ~/.npmrc
 
-# Or run directly
-bunx tembo-cli
-npx tembo-cli
+# 3. Install
+bun add -g @tryosschat/tembo-cli
+```
+
+### From Source
+
+```bash
+git clone https://github.com/tryosschat/tembo-cli.git
+cd tembo-cli
+bun install
+bun link
 ```
 
 ## Quick Start
 
 ```bash
-# 1. Get your API key from https://app.tembo.io → Settings → API Keys
+# 1. Get your Tembo API key from https://app.tembo.io → Settings → API Keys
 
 # 2. Authenticate
 tembo-cli auth login YOUR_API_KEY
