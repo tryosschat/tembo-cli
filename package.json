@@ -1,0 +1,50 @@
+{
+  "name": "@tryosschat/tembo-cli",
+  "version": "0.1.0",
+  "description": "CLI for the Tembo Public API - manage AI coding tasks and repositories",
+  "module": "src/index.ts",
+  "type": "module",
+  "bin": {
+    "tembo-cli": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch src/index.ts"
+  },
+  "files": [
+    "src",
+    "SKILL.md",
+    "README.md"
+  ],
+  "keywords": [
+    "tembo",
+    "cli",
+    "ai",
+    "coding-agent",
+    "agent-skill",
+    "automation"
+  ],
+  "author": "tryosschat",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tryosschat/tembo-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tryosschat/tembo-cli/issues"
+  },
+  "homepage": "https://github.com/tryosschat/tembo-cli#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2"
+  }
+}
