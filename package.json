@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/tryosschat/tembo-cli#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "devDependencies": {
     "@types/bun": "latest"
