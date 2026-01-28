@@ -1,18 +1,20 @@
 {
-  "name": "@tryosschat/tembo-cli",
-  "version": "0.1.6",
+  "name": "tembo-cli",
+  "version": "0.1.0",
   "description": "CLI for the Tembo Public API - manage AI coding tasks and repositories",
   "module": "src/index.ts",
   "type": "module",
   "bin": {
-    "tembo-cli": "./src/index.ts"
+    "tembo-cli": "./bin/tembo-cli"
   },
   "scripts": {
     "start": "bun run src/index.ts",
-    "dev": "bun --watch src/index.ts"
+    "dev": "bun --watch src/index.ts",
+    "deploy": "bun run scripts/deploy.ts"
   },
   "files": [
     "src",
+    "bin",
     "SKILL.md",
     "README.md"
   ],

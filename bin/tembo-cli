@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+const { execFileSync } = require("child_process");
+const { join } = require("path");
+
+try {
+  execFileSync("bun", [join(__dirname, "..", "src", "index.ts"), ...process.argv.slice(2)], {
+    stdio: "inherit",
+  });
+} catch (e) {
+  if (e.status) process.exit(e.status);
+  process.exit(1);
+}
