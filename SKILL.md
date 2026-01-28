@@ -24,9 +24,7 @@ Use this skill when:
 ## Installation
 
 ```bash
-bun add -g tembo-cli
-# or
-npx tembo-cli
+bun add -g github:tryosschat/tembo-cli
 ```
 
 ## Authentication
@@ -45,6 +43,20 @@ tembo-cli auth status
 ```
 
 You can also set the `TEMBO_API_KEY` environment variable.
+
+## Permissions
+
+**Important**: Agents using this skill MUST ask for explicit user confirmation before running any command that modifies state. This includes:
+
+- `tasks create` — creates a new coding task (costs compute, triggers an AI agent)
+- `auth login` / `auth logout` — modifies stored credentials
+
+Read-only commands (`tasks list`, `tasks search`, `repos list`, `auth whoami`, `auth status`) are safe to run without confirmation.
+
+**Example**: Before creating a task, always confirm:
+> "I'd like to create a Tembo task: *Fix the login bug* on repo `myorg/myapp`. Should I proceed?"
+
+Never run background tasks or batch-create tasks without the user explicitly allowing it.
 
 ## Commands
 
@@ -140,7 +152,7 @@ tembo-cli tasks create "Fix failing tests in PR #${PR_NUMBER}" \
 
 ## API Reference
 
-The CLI wraps the Tembo Public API at `https://internal.tembo.io`:
+The CLI wraps the Tembo Public API at `https://api.tembo.io`:
 
 | Endpoint | CLI Command |
 |----------|-------------|
@@ -157,7 +169,7 @@ Config is stored at `~/.tembo-cli/config.json`:
 ```json
 {
   "apiKey": "your-api-key",
-  "apiUrl": "https://internal.tembo.io"
+  "apiUrl": "https://api.tembo.io"
 }
 ```
 

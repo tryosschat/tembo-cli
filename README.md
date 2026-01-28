@@ -37,7 +37,7 @@ tembo-cli repos list               # List repos (--json)
 ## Agent Skill
 
 ```bash
-npx skills add tryosschat/tembo-cli
+bunx skills add tryosschat/tembo-cli
 ```
 
 ## License
