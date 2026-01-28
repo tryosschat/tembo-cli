@@ -6,30 +6,64 @@ export interface User {
   email?: string;
 }
 
+export interface PullRequest {
+  id: string;
+  url: string;
+  title: string;
+  status: string;
+  isDraft: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Solution {
+  id: string;
+  status: string;
+  type: string;
+  pullRequest?: PullRequest[];
+}
+
 export interface Task {
   id: string;
   title: string;
-  description: string;
-  status: string;
+  prompt: string;
   createdAt: string;
   updatedAt: string;
   organizationId: string;
+  kind?: string;
+  level?: number;
+  agent?: string;
+  solutionType?: string;
+  solutions?: Solution[];
+  htmlUrl?: string;
+  tags?: string[];
+}
+
+export interface TaskListMeta {
+  totalCount: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
 }
 
 export interface TaskListResponse {
   issues: Task[];
-  meta: {
-    totalCount: number;
-    page: number;
-    limit: number;
-  };
+  meta: TaskListMeta;
 }
 
 export interface Repository {
   id: string;
   name: string;
   url: string;
-  provider: string;
+  owner?: string;
+  targetBranch?: string;
+  description?: string;
+  integration?: {
+    id: string;
+    type: string;
+  };
 }
 
 export interface RepositoryListResponse {

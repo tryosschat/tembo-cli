@@ -2,27 +2,21 @@ import { Command } from "commander";
 import chalk from "chalk";
 import { createClient, TemboApiError, type Task } from "../api";
 
-function formatTask(task: Task): void {
-  console.log(`${chalk.cyan(task.id)} ${chalk.bold(task.title)}`);
-  console.log(`  Status: ${getStatusColor(task.status)}`);
-  if (task.description) {
-    const desc =
-      task.description.length > 80
-        ? task.description.slice(0, 80) + "..."
-        : task.description;
-    console.log(`  ${chalk.dim(desc)}`);
-  }
-  console.log(`  Created: ${chalk.dim(new Date(task.createdAt).toLocaleString())}`);
-  console.log();
+function getTaskStatus(task: Task): string {
+  if (!task.solutions || task.solutions.length === 0) return "pending";
+  const latest = task.solutions.at(-1);
+  return latest?.status || "unknown";
 }
 
 function getStatusColor(status: string): string {
   switch (status.toLowerCase()) {
+    case "success":
     case "completed":
     case "done":
       return chalk.green(status);
     case "in_progress":
     case "running":
+    case "working":
       return chalk.yellow(status);
     case "failed":
     case "error":
@@ -33,6 +27,37 @@ function getStatusColor(status: string): string {
     default:
       return chalk.white(status);
   }
+}
+
+function formatTask(task: Task): void {
+  const status = getTaskStatus(task);
+  console.log(`${chalk.cyan(task.id)} ${chalk.bold(task.title)}`);
+  console.log(`  Status: ${getStatusColor(status)}`);
+
+  if (task.agent) {
+    console.log(`  Agent: ${chalk.dim(task.agent)}`);
+  }
+
+  if (task.solutions?.length) {
+    for (const sol of task.solutions) {
+      if (sol.pullRequest?.length) {
+        for (const pr of sol.pullRequest) {
+          console.log(`  PR: ${chalk.underline(pr.url)} (${pr.status})`);
+        }
+      }
+    }
+  }
+
+  if (task.prompt) {
+    const desc =
+      task.prompt.length > 80
+        ? task.prompt.slice(0, 80) + "..."
+        : task.prompt;
+    console.log(`  ${chalk.dim(desc)}`);
+  }
+
+  console.log(`  Created: ${chalk.dim(new Date(task.createdAt).toLocaleString())}`);
+  console.log();
 }
 
 export function registerTaskCommands(program: Command): void {
@@ -72,7 +97,7 @@ export function registerTaskCommands(program: Command): void {
 
         console.log(
           chalk.dim(
-            `Page ${response.meta.page} of ${Math.ceil(response.meta.totalCount / response.meta.limit)}`
+            `Page ${response.meta.currentPage} of ${response.meta.totalPages}`
           )
         );
       } catch (error) {

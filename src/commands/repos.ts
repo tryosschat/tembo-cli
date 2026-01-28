@@ -30,9 +30,12 @@ export function registerRepoCommands(program: Command): void {
         console.log(chalk.bold(`Repositories (${response.codeRepositories.length})\n`));
 
         for (const repo of response.codeRepositories) {
-          const providerIcon = getProviderIcon(repo.provider);
+          const providerIcon = getProviderIcon(repo.integration?.type);
           console.log(`${providerIcon} ${chalk.cyan(repo.name)}`);
           console.log(`   ${chalk.dim(repo.url)}`);
+          if (repo.description) {
+            console.log(`   ${chalk.dim(repo.description)}`);
+          }
           console.log();
         }
       } catch (error) {
@@ -52,7 +55,7 @@ export function registerRepoCommands(program: Command): void {
     });
 }
 
-function getProviderIcon(provider: string): string {
+function getProviderIcon(provider: string | undefined): string {
   switch (provider?.toLowerCase()) {
     case "github":
       return "[GH]";
