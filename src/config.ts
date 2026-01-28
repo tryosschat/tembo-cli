@@ -11,7 +11,7 @@ const CONFIG_PATH = join(CONFIG_DIR, "config.json");
 
 const DEFAULT_CONFIG: Config = {
   apiKey: "",
-  apiUrl: "https://internal.tembo.io",
+  apiUrl: "https://api.tembo.io",
 };
 
 async function ensureConfigDir(): Promise<void> {

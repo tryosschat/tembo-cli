@@ -59,7 +59,7 @@ export class TemboApi {
   private apiKey: string;
   private baseUrl: string;
 
-  constructor(apiKey: string, baseUrl: string = "https://internal.tembo.io") {
+  constructor(apiKey: string, baseUrl: string = "https://api.tembo.io") {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
   }
