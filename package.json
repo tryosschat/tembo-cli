@@ -1,6 +1,6 @@
 {
   "name": "tembo-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI for the Tembo Public API - manage AI coding tasks and repositories",
   "module": "src/index.ts",
   "type": "module",
