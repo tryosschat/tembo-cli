@@ -5,7 +5,7 @@ CLI for the [Tembo Public API](https://docs.tembo.io/features/public-api) — ma
 ## Install
 
 ```bash
-bun add -g @tryosschat/tembo-cli
+bun add -g github:tryosschat/tembo-cli
 ```
 
 ## Quick Start
